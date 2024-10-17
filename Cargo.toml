@@ -1,0 +1,23 @@
+[package]
+name = "ring-test"
+version = "0.1.0"
+edition = "2021"
+authors = ["pawurb <contact@pawelurbanek.com>"]
+
+[package.metadata.release]
+release = false
+
+# https://github.com/rustwasm/wasm-pack/issues/1247
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+worker = { version = "0.4.2" }
+worker-macros = { version = "0.4.2" }
+console_error_panic_hook = { version = "0.1.1" }
+ring = { version = "0.17.8" }
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+ring = { version = "0.17.8", features = ["wasm32_unknown_unknown_js"] }
